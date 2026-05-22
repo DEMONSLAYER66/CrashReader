@@ -1,0 +1,27 @@
+CrashReader - Minecraft Modpack Crash Analyzer
+
+CrashReader is a Windows desktop app that watches your modpack crash logs and helps you find likely culprit mods fast.
+
+What it does:
+- Monitors new crash files in your selected modpack folder
+- Scores and ranks likely culprit mods using crash evidence
+- Shows popup alerts when new crash signatures are detected
+- Tracks repeated crashes and signature counts over time
+- Highlights likely mod conflict pairs
+- Includes tools to browse mods, inspect live logs, and edit config files
+
+Who it is for:
+- Modpack players troubleshooting frequent crashes
+- Server owners and pack maintainers identifying unstable mod combinations
+
+Key benefits:
+- Faster crash triage without digging through huge log files manually
+- Better visibility into recurring failures and conflict patterns
+- Simple GUI workflow for monitoring, diagnostics, and config adjustments
+
+Platform:
+- Windows
+
+Notes:
+- Best results come from selecting the real modpack root folder
+- Save data is stored under LocalAppData when running the packaged executable
