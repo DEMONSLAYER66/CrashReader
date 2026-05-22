@@ -37,15 +37,22 @@ jobs:
       - name: Locate ISCC compiler
         shell: pwsh
         run: |
+          $fromPath = Get-Command ISCC.exe -ErrorAction SilentlyContinue
+
           $candidates = @(
-            "$env:ProgramFiles(x86)\Inno Setup 6\ISCC.exe",
+            "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe",
             "$env:ProgramFiles\Inno Setup 6\ISCC.exe",
             "$env:LOCALAPPDATA\Programs\Inno Setup 6\ISCC.exe",
-            "$env:ProgramFiles(x86)\Inno Setup 5\ISCC.exe",
-            "$env:ProgramFiles\Inno Setup 5\ISCC.exe"
+            "${env:ProgramFiles(x86)}\Inno Setup 5\ISCC.exe",
+            "$env:ProgramFiles\Inno Setup 5\ISCC.exe",
+            "C:\ProgramData\chocolatey\lib\innosetup\tools\ISCC.exe"
           )
 
           $iscc = $null
+          if ($fromPath) {
+            $iscc = $fromPath.Source
+          }
+
           foreach ($path in $candidates) {
             if (Test-Path $path) {
               $iscc = $path
@@ -56,6 +63,8 @@ jobs:
           if (-not $iscc) {
             throw "ISCC.exe not found after installing Inno Setup"
           }
+
+          Write-Host "Using ISCC at: $iscc"
 
           "ISCC_EXE=$iscc" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
 
